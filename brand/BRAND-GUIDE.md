@@ -1,22 +1,22 @@
-# Ghid de brand — Tool Connect
+# Brand Guide — Tool Connect
 
-Tot ce ai nevoie ca blogul să arate la fel ca site-ul principal (tool-connect.com) și aplicația mobilă.
+Everything you need to make the blog look the same as the main website (tool-connect.com) and the mobile app.
 
-## Culorile brandului
+## Brand colors
 
-Brandul are **doar 3 culori**. Tot restul paletei e derivat matematic din ele.
+The brand has **only 3 colors**. The rest of the palette is mathematically derived from them.
 
-| Culoare | Hex | Când o folosești |
+| Color | Hex | When to use it |
 |---|---|---|
-| **Main Purple** | `#7631EE` | Butoane, link-uri, accente — culoarea principală de acțiune (CTA) |
-| **Dark Purple** | `#0F0A32` | Fundaluri închise (hero, footer), titluri pe fundal deschis |
-| **Light Purple** | `#BC95FB` | Hover states, fundaluri colorate subtile, decorațiuni |
+| **Main Purple** | `#7631EE` | Buttons, links, accents — the main action color (CTA) |
+| **Dark Purple** | `#0F0A32` | Dark backgrounds (hero, footer), headings on light backgrounds |
+| **Light Purple** | `#BC95FB` | Hover states, subtle tinted backgrounds, decorations |
 
-Pentru text normal pe fundal alb se folosește `#1F2937` (gri închis), nu negru pur.
+For regular text on a white background use `#1F2937` (dark gray), not pure black.
 
-### Paleta completă (pentru Tailwind)
+### Full palette (for Tailwind)
 
-Paleta de 10 nuanțe e derivată din cele 3 culori de mai sus — o ai gata de copiat în [`colors.ts`](colors.ts). În Tailwind o adaugi așa:
+The 10-shade palette is derived from the 3 colors above — it's ready to copy in [`colors.ts`](colors.ts). Add it to Tailwind like this:
 
 ```ts
 // tailwind.config.ts
@@ -30,7 +30,7 @@ const config = {
           200: '#E3CFFD',
           300: '#CFB1FC',
           400: '#BC95FB', // lightPurple
-          500: '#7631EE', // mainPurple — culoarea principală
+          500: '#7631EE', // mainPurple — the main brand color
           600: '#5C27BF',
           700: '#431E90',
           800: '#291461',
@@ -45,52 +45,54 @@ const config = {
 }
 ```
 
-Apoi în cod folosești clase ca `bg-primary-500`, `text-primary-900`, `hover:bg-primary-600`.
+Then in your code use classes like `bg-primary-500`, `text-primary-900`, `hover:bg-primary-600`.
 
-### Reguli simple
+### Simple rules
 
-- Buton principal: fundal `primary-500`, text alb, hover `primary-600`.
-- Secțiuni închise (hero, footer): fundal `primary-900`, text alb.
-- Fundaluri deschise: alb sau `primary-50` / `primary-100`.
-- Gradient folosit pe site: `linear-gradient(135deg, #0F0A32 0%, #BC95FB 100%)`.
-- **Nu adăuga alte culori** (verde, albastru etc.) decât pentru stări standard (eroare = roșu, succes = verde).
+- Primary button: `primary-500` background, white text, hover `primary-600`.
+- Dark sections (hero, footer): `primary-900` background, white text.
+- Light backgrounds: white or `primary-50` / `primary-100`.
+- Gradient used on the website: `linear-gradient(135deg, #0F0A32 0%, #BC95FB 100%)`.
+- **Don't add other colors** (green, blue, etc.) except for standard states (error = red, success = green).
 
 ## Font
 
-**Inter**, de pe Google Fonts, în greutățile 400, 500, 600 și 700.
+The website uses **Inter** (from Google Fonts), in weights 400, 500, 600 and 700. It is the only font of the brand — use it for everything: headings, body text, buttons.
 
 ```css
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 ```
 
-(În Next.js e și mai simplu cu `next/font/google` — încarcă fontul automat, fără import în CSS.)
+Note: in the font stack `'Inter', system-ui, sans-serif`, the `system-ui` and `sans-serif` parts are **just fallbacks** — they only kick in if Inter fails to load. Don't treat them as brand fonts.
 
-## Logo și iconițe
+(In Next.js it's even simpler with `next/font/google` — it loads the font automatically, no CSS import needed.)
 
-Toate fișierele sunt în folderul [`logo/`](logo/):
+## Logo and icons
 
-| Fișier | La ce folosește |
+All files are in the [`logo/`](logo/) folder:
+
+| File | What it's for |
 |---|---|
-| `logo.webp` | Logo-ul principal (folosit pe site, inclusiv în datele SEO) |
-| `logo-header.png` | Varianta pentru header / navbar |
-| `logo.png` | Varianta PNG generică |
-| `favicon.ico` | Favicon-ul site-ului |
-| `icons/icon-16.png`, `icon-32.png` | Favicon PNG pentru browsere |
-| `icons/icon-192.png`, `icon-512.png` | Iconițe PWA / manifest |
-| `icons/apple-touch-icon.png` | Iconiță pentru iOS (180×180) |
-| `icons/safari-pinned-tab.svg` | Pinned tab Safari (se colorează cu `#7631EE`) |
+| `logo.webp` | The main logo (used on the website, including in SEO data) |
+| `logo-header.png` | Header / navbar variant |
+| `logo.png` | Generic PNG variant |
+| `favicon.ico` | The website favicon |
+| `icons/icon-16.png`, `icon-32.png` | PNG favicons for browsers |
+| `icons/icon-192.png`, `icon-512.png` | PWA / manifest icons |
+| `icons/apple-touch-icon.png` | iOS icon (180×180) |
+| `icons/safari-pinned-tab.svg` | Safari pinned tab (tinted with `#7631EE`) |
 
-Nu modifica, nu întinde și nu recolora logo-ul.
+Don't modify, stretch or recolor the logo.
 
-## Imagini
+## Images
 
-În folderul [`images/`](images/):
+In the [`images/`](images/) folder:
 
-- `og-image.webp` — imaginea care apare când dai share pe social media (1200×630). Poți porni de la ea pentru varianta de blog.
-- `background.webp` — fundalul subtil folosit pe site-ul principal.
+- `og-image.webp` — the image shown when sharing on social media (1200×630). You can start from it for the blog's own variant.
+- `background.webp` — the subtle background used on the main website.
 
-## Ton și conținut
+## Tone and content
 
-- Numele brandului se scrie mereu **Tool Connect** (două cuvinte, cu majuscule).
-- Publicul: oameni din Cehia care caută prestatori de servicii + prestatorii înșiși. Limbile site-ului: engleză și cehă.
-- Important (juridic/SEO): Tool Connect **nu are nicio legătură** cu DeWalt "Tool Connect" sau alți producători de scule — nu folosi imagini sau referințe la scule electrice care ar putea crea confuzie.
+- The brand name is always written **Tool Connect** (two words, capitalized).
+- Audience: people in the Czech Republic looking for service providers + the providers themselves. Website languages: English and Czech.
+- Important (legal/SEO): Tool Connect has **no relation** to DeWalt "Tool Connect" or any other power tool manufacturer — don't use images or references to power tools that could create confusion.
