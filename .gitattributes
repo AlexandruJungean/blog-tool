@@ -1,0 +1,11 @@
+# Normalize text files, keep binaries untouched
+* text=auto
+
+*.png binary
+*.ico binary
+*.webp binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.woff binary
+*.woff2 binary
