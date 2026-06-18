@@ -82,32 +82,89 @@ export default function BlogPage() {
           <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white to-transparent" />
         </section>
 
-        {/* ═══════════ EMPTY STATE ═══════════ */}
-        <section className="mx-auto max-w-7xl px-6 lg:px-8 py-24 lg:py-32">
-          <div className="text-center max-w-md mx-auto">
-            <div className="mx-auto w-20 h-20 rounded-2xl bg-primary-50 flex items-center justify-center mb-6">
-              <svg
-                width="36"
-                height="36"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="text-primary-400"
-              >
-                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
-                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
-              </svg>
+        {/* ═══════════ BLOG POSTS ═══════════ */}
+        <section className="mx-auto max-w-7xl px-6 lg:px-8 py-24 lg:py-32 space-y-20">
+          
+          {/* Category: For Expats in Prague */}
+          <div>
+            <div className="flex items-center gap-4 mb-8">
+              <h2 className="text-2xl font-bold text-primary-900 tracking-tight">
+                {t(translations.categories.expats, lang)}
+              </h2>
+              <div className="flex-1 h-px bg-primary-100" />
             </div>
-            <h2 className="text-2xl font-bold text-primary-900 tracking-tight">
-              {t(translations.empty.title, lang)}
-            </h2>
-            <p className="mt-3 text-foreground/50 leading-relaxed">
-              {t(translations.empty.description, lang)}
-            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {/* Card 1 */}
+              <Link href="/what-services-cost-prague-2026" className="group flex flex-col bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all overflow-hidden">
+                <div className="aspect-[16/9] w-full bg-gray-100 overflow-hidden relative">
+                  <div className="absolute inset-0 bg-primary-500/10 group-hover:bg-transparent transition-colors z-10" />
+                  <img src="/og-image.webp" alt="Cover" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                </div>
+                <div className="p-6 flex-1 flex flex-col">
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="px-2.5 py-1 rounded-md bg-primary-50 text-primary-700 text-xs font-semibold">
+                      {t(translations.categories.expats, lang)}
+                    </span>
+                    <span className="text-xs text-gray-400">15. 6. 2026</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary-600 transition-colors">
+                    {t(translations.posts.costTitle, lang)}
+                  </h3>
+                  <p className="text-sm text-gray-600 line-clamp-3 mb-6 flex-1">
+                    {t(translations.posts.costDesc, lang)}
+                  </p>
+                  <div className="flex items-center text-primary-600 font-medium text-sm mt-auto">
+                    {t(translations.posts.readMore, lang)}
+                    <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                </div>
+              </Link>
+            </div>
           </div>
+
+          {/* Category: For Providers */}
+          <div>
+            <div className="flex items-center gap-4 mb-8">
+              <h2 className="text-2xl font-bold text-primary-900 tracking-tight">
+                {t(translations.categories.providers, lang)}
+              </h2>
+              <div className="flex-1 h-px bg-primary-100" />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {/* Card 2 */}
+              <Link href="/jak-ziskat-vic-zakazek-remeslnik-2026" className="group flex flex-col bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all overflow-hidden">
+                <div className="aspect-[16/9] w-full bg-gray-100 overflow-hidden relative">
+                  <div className="absolute inset-0 bg-primary-500/10 group-hover:bg-transparent transition-colors z-10" />
+                  <img src="/og-image.webp" alt="Cover" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                </div>
+                <div className="p-6 flex-1 flex flex-col">
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="px-2.5 py-1 rounded-md bg-primary-50 text-primary-700 text-xs font-semibold">
+                      {t(translations.categories.providers, lang)}
+                    </span>
+                    <span className="text-xs text-gray-400">15. 6. 2026</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary-600 transition-colors">
+                    {t(translations.posts.craftsmanTitle, lang)}
+                  </h3>
+                  <p className="text-sm text-gray-600 line-clamp-3 mb-6 flex-1">
+                    {t(translations.posts.craftsmanDesc, lang)}
+                  </p>
+                  <div className="flex items-center text-primary-600 font-medium text-sm mt-auto">
+                    {t(translations.posts.readMore, lang)}
+                    <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                </div>
+              </Link>
+            </div>
+          </div>
+
         </section>
 
         {/* ═══════════ TOOL CONNECT CTA ═══════════ */}

@@ -35,6 +35,19 @@ export const translations = {
     },
   },
 
+  // ── Categories & Posts ──
+  categories: {
+    providers: { en: "For Providers", cs: "Pro poskytovatele" },
+    expats: { en: "For Expats in Prague", cs: "Pro expaty v Praze" },
+  },
+  posts: {
+    craftsmanTitle: { en: "How to Get More Jobs as a Craftsman in Czechia (2026)", cs: "Jak získat víc zakázek jako řemeslník v Česku (2026)" },
+    craftsmanDesc: { en: "Concrete steps for tradesmen and craftsmen looking to fill their availability: online profile, reviews, response speed...", cs: "Konkrétní kroky pro živnostníky a řemeslníky, kteří chtějí zaplnit volné kapacity: online profil, recenze, rychlost reakce..." },
+    costTitle: { en: "What Services Actually Cost in Prague: A 2026 Price Guide", cs: "Kolik skutečně stojí služby v Praze: Průvodce cenami pro rok 2026" },
+    costDesc: { en: "Realistic 2026 price ranges for handymen, plumbers, electricians, cleaners, tutors, translators and movers in Prague...", cs: "Reálné cenové rozpětí pro rok 2026 pro řemeslníky, instalatéry, elektrikáře, úklid, lektory, překladatele a stěhováky v Praze..." },
+    readMore: { en: "Read Article", cs: "Číst článek" },
+  },
+
   // ── CTA ──
   cta: {
     title: {
