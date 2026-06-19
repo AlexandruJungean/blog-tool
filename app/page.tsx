@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { useLanguage } from "./i18n/LanguageProvider";
@@ -100,7 +99,6 @@ export default function BlogPage() {
               <Link href="/what-services-cost-prague-2026" className="group flex flex-col bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all overflow-hidden">
                 <div className="aspect-[16/9] w-full bg-gray-100 overflow-hidden relative">
                   <div className="absolute inset-0 bg-primary-500/10 group-hover:bg-transparent transition-colors z-10" />
-                  <Image src="https://www.emeoutlookmag.com/media/prague-a-fairy-tale-city-steeped-in-culture-and-romance-1580454446.coverImage.2x-jpg-webp.webp" alt="Prague city" fill sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>
                 <div className="p-6 flex-1 flex flex-col">
                   <div className="flex items-center gap-3 mb-4">
@@ -140,7 +138,6 @@ export default function BlogPage() {
               <Link href="/jak-ziskat-vic-zakazek-remeslnik-2026" className="group flex flex-col bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all overflow-hidden">
                 <div className="aspect-[16/9] w-full bg-gray-100 overflow-hidden relative">
                   <div className="absolute inset-0 bg-primary-500/10 group-hover:bg-transparent transition-colors z-10" />
-                  <Image src="https://static.toprecepty.cz/fotky/clanky_hlavni/mistr-digitalizace-860-484-wide.png" alt="Craftsman at work" fill sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>
                 <div className="p-6 flex-1 flex flex-col">
                   <div className="flex items-center gap-3 mb-4">
