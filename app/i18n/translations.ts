@@ -46,6 +46,10 @@ export const translations = {
     costTitle: { en: "What Services Actually Cost in Prague: A 2026 Price Guide", cs: "Kolik skutečně stojí služby v Praze: Průvodce cenami pro rok 2026" },
     costDesc: { en: "Realistic 2026 price ranges for handymen, plumbers, electricians, cleaners, tutors, translators and movers in Prague...", cs: "Reálné cenové rozpětí pro rok 2026 pro řemeslníky, instalatéry, elektrikáře, úklid, lektory, překladatele a stěhováky v Praze..." },
     readMore: { en: "Read Article", cs: "Číst článek" },
+    pricingTitle: { en: "How to Price Your Services Without Underselling Yourself (2026)", cs: "Jak stanovit ceny, aniž byste podceňovali svou práci (2026)" },
+    pricingDesc: { en: "Step-by-step pricing framework for tradespeople: calculate your minimum rate, raise prices confidently, and handle 'that's too expensive' without losing clients.", cs: "Kalkulační vzorec pro živnostníky: jak zjistit minimální sazbu, kdy zvýšit ceny a jak reagovat na 'je to moc drahé' bez ztráty zákazníků." },
+    handymanTitle: { en: "How to Find a Reliable Handyman in Prague (Expat Guide 2026)", cs: "Jak najít spolehlivého řemeslníka v Praze (Průvodce pro cizince 2026)" },
+    handymanDesc: { en: "Where to search, how to vet, red flags to avoid, and fair 2026 price ranges for home services in Prague — no Czech language required.", cs: "Kde hledat, jak ověřit, varovné signály a spravedlivé ceny za domácí opravy v Praze 2026 — bez znalosti češtiny." },
   },
 
   // ── CTA ──

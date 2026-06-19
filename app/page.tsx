@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { useLanguage } from "./i18n/LanguageProvider";
@@ -99,6 +100,7 @@ export default function BlogPage() {
               <Link href="/what-services-cost-prague-2026" className="group flex flex-col bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all overflow-hidden">
                 <div className="aspect-[16/9] w-full bg-gray-100 overflow-hidden relative">
                   <div className="absolute inset-0 bg-primary-500/10 group-hover:bg-transparent transition-colors z-10" />
+                  <Image src="/what-services-cost-prague-2026.webp" alt="Prague city" fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>
                 <div className="p-6 flex-1 flex flex-col">
                   <div className="flex items-center gap-3 mb-4">
@@ -112,6 +114,34 @@ export default function BlogPage() {
                   </h3>
                   <p className="text-sm text-gray-600 line-clamp-3 mb-6 flex-1">
                     {t(translations.posts.costDesc, lang)}
+                  </p>
+                  <div className="flex items-center text-primary-600 font-medium text-sm mt-auto">
+                    {t(translations.posts.readMore, lang)}
+                    <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                </div>
+              </Link>
+
+              {/* Card 4 — Handyman guide */}
+              <Link href="/find-reliable-handyman-prague-2026" className="group flex flex-col bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all overflow-hidden">
+                <div className="aspect-[16/9] w-full bg-gray-100 overflow-hidden relative">
+                  <div className="absolute inset-0 bg-primary-500/10 group-hover:bg-transparent transition-colors z-10" />
+                  <Image src="/find-reliable-handyman-prague-2026.webp" alt="Handyman in Prague" fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                </div>
+                <div className="p-6 flex-1 flex flex-col">
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="px-2.5 py-1 rounded-md bg-primary-50 text-primary-700 text-xs font-semibold">
+                      {t(translations.categories.expats, lang)}
+                    </span>
+                    <span className="text-xs text-gray-400">19. 6. 2026</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary-600 transition-colors">
+                    {t(translations.posts.handymanTitle, lang)}
+                  </h3>
+                  <p className="text-sm text-gray-600 line-clamp-3 mb-6 flex-1">
+                    {t(translations.posts.handymanDesc, lang)}
                   </p>
                   <div className="flex items-center text-primary-600 font-medium text-sm mt-auto">
                     {t(translations.posts.readMore, lang)}
@@ -138,6 +168,7 @@ export default function BlogPage() {
               <Link href="/jak-ziskat-vic-zakazek-remeslnik-2026" className="group flex flex-col bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all overflow-hidden">
                 <div className="aspect-[16/9] w-full bg-gray-100 overflow-hidden relative">
                   <div className="absolute inset-0 bg-primary-500/10 group-hover:bg-transparent transition-colors z-10" />
+                  <Image src="/jak-ziskat-vic-zakazek-remeslnik-2026.webp" alt="Craftsman at work" fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>
                 <div className="p-6 flex-1 flex flex-col">
                   <div className="flex items-center gap-3 mb-4">
@@ -151,6 +182,34 @@ export default function BlogPage() {
                   </h3>
                   <p className="text-sm text-gray-600 line-clamp-3 mb-6 flex-1">
                     {t(translations.posts.craftsmanDesc, lang)}
+                  </p>
+                  <div className="flex items-center text-primary-600 font-medium text-sm mt-auto">
+                    {t(translations.posts.readMore, lang)}
+                    <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                </div>
+              </Link>
+
+              {/* Card 3 — Pricing */}
+              <Link href="/jak-stanovit-ceny-remeslnik-2026" className="group flex flex-col bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all overflow-hidden">
+                <div className="aspect-[16/9] w-full bg-gray-100 overflow-hidden relative">
+                  <div className="absolute inset-0 bg-primary-500/10 group-hover:bg-transparent transition-colors z-10" />
+                  <Image src="/jak-stanovit-ceny-remeslnik-2026.webp" alt="Tradesperson pricing work" fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                </div>
+                <div className="p-6 flex-1 flex flex-col">
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="px-2.5 py-1 rounded-md bg-primary-50 text-primary-700 text-xs font-semibold">
+                      {t(translations.categories.providers, lang)}
+                    </span>
+                    <span className="text-xs text-gray-400">19. 6. 2026</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary-600 transition-colors">
+                    {t(translations.posts.pricingTitle, lang)}
+                  </h3>
+                  <p className="text-sm text-gray-600 line-clamp-3 mb-6 flex-1">
+                    {t(translations.posts.pricingDesc, lang)}
                   </p>
                   <div className="flex items-center text-primary-600 font-medium text-sm mt-auto">
                     {t(translations.posts.readMore, lang)}
