@@ -98,7 +98,13 @@ export default async function PostPage(
           <div className="mx-auto max-w-3xl">
             {data.section && (
               <span className="inline-block mb-4 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-white/15 text-white/80">
-                {data.section === "client" ? "For expats in Prague" : "Pro poskytovatele"}
+                {data.section === "client"
+                  ? data.lang === "cs"
+                    ? "Pro expaty v Praze"
+                    : "For expats in Prague"
+                  : data.lang === "cs"
+                    ? "Pro poskytovatele"
+                    : "For providers"}
               </span>
             )}
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">

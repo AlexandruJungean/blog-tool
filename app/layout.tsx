@@ -11,16 +11,16 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "Tool Connect Blog — Tips for Expats in the Czech Republic",
+    default: "The Tool Connect Guide: Local Services, Expat Life & Real Stories",
     template: "%s | Tool Connect Blog",
   },
   description:
-    "Practical guides, tips, and advice for expats living in Prague and the Czech Republic. Find trusted service providers, navigate local life, and settle in with confidence.",
+    "Practical guides for expats living in Czechia and for local service providers who want to reach them. Real stories, fair pricing, and tips that build trust on both sides.",
   metadataBase: new URL("https://blog.tool-connect.com"),
   openGraph: {
-    title: "Tool Connect Blog",
+    title: "The Tool Connect Guide: Local Services, Expat Life & Real Stories",
     description:
-      "Practical guides, tips, and advice for expats living in Prague and the Czech Republic.",
+      "Practical guides for expats living in Czechia and for local service providers who want to reach them. Real stories, fair pricing, and tips that build trust on both sides.",
     url: "https://blog.tool-connect.com",
     siteName: "Tool Connect Blog",
     images: [
@@ -36,9 +36,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Tool Connect Blog",
+    title: "The Tool Connect Guide: Local Services, Expat Life & Real Stories",
     description:
-      "Practical guides, tips, and advice for expats living in Prague and the Czech Republic.",
+      "Practical guides for expats living in Czechia and for local service providers who want to reach them. Real stories, fair pricing, and tips that build trust on both sides.",
     images: ["/og-image.webp"],
   },
   icons: {
@@ -60,7 +60,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} antialiased`}>
+    <html lang="cs" className={`${inter.variable} antialiased`}>
       <body className="min-h-dvh flex flex-col font-sans">
         <LanguageProvider>{children}</LanguageProvider>
       </body>

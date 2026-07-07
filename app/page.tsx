@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Header from "./components/Header";
@@ -9,6 +10,10 @@ import { translations, t } from "./i18n/translations";
 
 export default function BlogPage() {
   const { lang } = useLanguage();
+
+  useEffect(() => {
+    document.title = t(translations.hero.blogTitle, lang);
+  }, [lang]);
 
   return (
     <>
@@ -86,14 +91,17 @@ export default function BlogPage() {
         {/* ═══════════ BLOG POSTS ═══════════ */}
         <section className="mx-auto max-w-7xl px-6 lg:px-8 py-24 lg:py-32 space-y-20">
           
-          {/* Category: For Expats in Prague */}
+          {/* Category: For Expats in Prague — always shown in English */}
           <div>
-            <div className="flex items-center gap-4 mb-8">
+            <div className="flex items-center gap-4 mb-2">
               <h2 className="text-2xl font-bold text-primary-900 tracking-tight">
-                {t(translations.categories.expats, lang)}
+                {translations.categories.expats.en}
               </h2>
               <div className="flex-1 h-px bg-primary-100" />
             </div>
+            <p className="text-sm text-gray-500 mb-8">
+              {translations.categories.expatsDesc.en}
+            </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {/* Card 1 */}
@@ -105,18 +113,18 @@ export default function BlogPage() {
                 <div className="p-6 flex-1 flex flex-col">
                   <div className="flex items-center gap-3 mb-4">
                     <span className="px-2.5 py-1 rounded-md bg-primary-50 text-primary-700 text-xs font-semibold">
-                      {t(translations.categories.expats, lang)}
+                      {translations.categories.expats.en}
                     </span>
-                    <span className="text-xs text-gray-400">15. 6. 2026</span>
+                    <span className="text-xs text-gray-400">Jun 15, 2026</span>
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary-600 transition-colors">
-                    {t(translations.posts.costTitle, lang)}
+                    {translations.posts.costTitle.en}
                   </h3>
                   <p className="text-sm text-gray-600 line-clamp-3 mb-6 flex-1">
-                    {t(translations.posts.costDesc, lang)}
+                    {translations.posts.costDesc.en}
                   </p>
                   <div className="flex items-center text-primary-600 font-medium text-sm mt-auto">
-                    {t(translations.posts.readMore, lang)}
+                    {translations.posts.readMore.en}
                     <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
@@ -133,18 +141,74 @@ export default function BlogPage() {
                 <div className="p-6 flex-1 flex flex-col">
                   <div className="flex items-center gap-3 mb-4">
                     <span className="px-2.5 py-1 rounded-md bg-primary-50 text-primary-700 text-xs font-semibold">
-                      {t(translations.categories.expats, lang)}
+                      {translations.categories.expats.en}
                     </span>
-                    <span className="text-xs text-gray-400">19. 6. 2026</span>
+                    <span className="text-xs text-gray-400">Jun 19, 2026</span>
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary-600 transition-colors">
-                    {t(translations.posts.handymanTitle, lang)}
+                    {translations.posts.handymanTitle.en}
                   </h3>
                   <p className="text-sm text-gray-600 line-clamp-3 mb-6 flex-1">
-                    {t(translations.posts.handymanDesc, lang)}
+                    {translations.posts.handymanDesc.en}
                   </p>
                   <div className="flex items-center text-primary-600 font-medium text-sm mt-auto">
-                    {t(translations.posts.readMore, lang)}
+                    {translations.posts.readMore.en}
+                    <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                </div>
+              </Link>
+
+              {/* Card — DIY YouTube fix */}
+              <Link href="/diy-youtube-fix-prague-2026" className="group flex flex-col bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all overflow-hidden">
+                <div className="aspect-[16/9] w-full bg-gray-100 overflow-hidden relative">
+                  <div className="absolute inset-0 bg-primary-500/10 group-hover:bg-transparent transition-colors z-10" />
+                  <Image src="/diy-youtube-fix-prague-2026.webp" alt="Person fixing apartment in Prague" fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                </div>
+                <div className="p-6 flex-1 flex flex-col">
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="px-2.5 py-1 rounded-md bg-primary-50 text-primary-700 text-xs font-semibold">
+                      {translations.categories.expats.en}
+                    </span>
+                    <span className="text-xs text-gray-400">Jun 27, 2026</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary-600 transition-colors">
+                    {translations.posts.diyYoutubeTitle.en}
+                  </h3>
+                  <p className="text-sm text-gray-600 line-clamp-3 mb-6 flex-1">
+                    {translations.posts.diyYoutubeDesc.en}
+                  </p>
+                  <div className="flex items-center text-primary-600 font-medium text-sm mt-auto">
+                    {translations.posts.readMore.en}
+                    <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                </div>
+              </Link>
+
+              {/* Card — Hot water outages */}
+              <Link href="/hot-water-outages-prague-2026" className="group flex flex-col bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all overflow-hidden">
+                <div className="aspect-[16/9] w-full bg-gray-100 overflow-hidden relative">
+                  <div className="absolute inset-0 bg-primary-500/10 group-hover:bg-transparent transition-colors z-10" />
+                  <Image src="/hot-water-outages-prague-2026.webp" alt="Bathroom shower during a Prague hot water outage" fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                </div>
+                <div className="p-6 flex-1 flex flex-col">
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="px-2.5 py-1 rounded-md bg-primary-50 text-primary-700 text-xs font-semibold">
+                      {translations.categories.expats.en}
+                    </span>
+                    <span className="text-xs text-gray-400">Jul 6, 2026</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary-600 transition-colors">
+                    {translations.posts.hotWaterTitle.en}
+                  </h3>
+                  <p className="text-sm text-gray-600 line-clamp-3 mb-6 flex-1">
+                    {translations.posts.hotWaterDesc.en}
+                  </p>
+                  <div className="flex items-center text-primary-600 font-medium text-sm mt-auto">
+                    {translations.posts.readMore.en}
                     <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
@@ -154,14 +218,17 @@ export default function BlogPage() {
             </div>
           </div>
 
-          {/* Category: For Providers */}
+          {/* Category: For Providers — always shown in Czech */}
           <div>
-            <div className="flex items-center gap-4 mb-8">
+            <div className="flex items-center gap-4 mb-2">
               <h2 className="text-2xl font-bold text-primary-900 tracking-tight">
-                {t(translations.categories.providers, lang)}
+                {translations.categories.providers.cs}
               </h2>
               <div className="flex-1 h-px bg-primary-100" />
             </div>
+            <p className="text-sm text-gray-500 mb-8">
+              {translations.categories.providersDesc.cs}
+            </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {/* Card 2 */}
@@ -173,18 +240,18 @@ export default function BlogPage() {
                 <div className="p-6 flex-1 flex flex-col">
                   <div className="flex items-center gap-3 mb-4">
                     <span className="px-2.5 py-1 rounded-md bg-primary-50 text-primary-700 text-xs font-semibold">
-                      {t(translations.categories.providers, lang)}
+                      {translations.categories.providers.cs}
                     </span>
                     <span className="text-xs text-gray-400">15. 6. 2026</span>
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary-600 transition-colors">
-                    {t(translations.posts.craftsmanTitle, lang)}
+                    {translations.posts.craftsmanTitle.cs}
                   </h3>
                   <p className="text-sm text-gray-600 line-clamp-3 mb-6 flex-1">
-                    {t(translations.posts.craftsmanDesc, lang)}
+                    {translations.posts.craftsmanDesc.cs}
                   </p>
                   <div className="flex items-center text-primary-600 font-medium text-sm mt-auto">
-                    {t(translations.posts.readMore, lang)}
+                    {translations.posts.readMore.cs}
                     <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
@@ -201,18 +268,74 @@ export default function BlogPage() {
                 <div className="p-6 flex-1 flex flex-col">
                   <div className="flex items-center gap-3 mb-4">
                     <span className="px-2.5 py-1 rounded-md bg-primary-50 text-primary-700 text-xs font-semibold">
-                      {t(translations.categories.providers, lang)}
+                      {translations.categories.providers.cs}
                     </span>
                     <span className="text-xs text-gray-400">19. 6. 2026</span>
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary-600 transition-colors">
-                    {t(translations.posts.pricingTitle, lang)}
+                    {translations.posts.pricingTitle.cs}
                   </h3>
                   <p className="text-sm text-gray-600 line-clamp-3 mb-6 flex-1">
-                    {t(translations.posts.pricingDesc, lang)}
+                    {translations.posts.pricingDesc.cs}
                   </p>
                   <div className="flex items-center text-primary-600 font-medium text-sm mt-auto">
-                    {t(translations.posts.readMore, lang)}
+                    {translations.posts.readMore.cs}
+                    <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                </div>
+              </Link>
+
+              {/* Card — Expat customers guide */}
+              <Link href="/zakaznici-z-rad-expatu-v-cesku" className="group flex flex-col bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all overflow-hidden">
+                <div className="aspect-[16/9] w-full bg-gray-100 overflow-hidden relative">
+                  <div className="absolute inset-0 bg-primary-500/10 group-hover:bg-transparent transition-colors z-10" />
+                  <Image src="/zakaznici-z-rad-expatu-v-cesku.webp" alt="Tradesperson communicating with expat client" fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                </div>
+                <div className="p-6 flex-1 flex flex-col">
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="px-2.5 py-1 rounded-md bg-primary-50 text-primary-700 text-xs font-semibold">
+                      {translations.categories.providers.cs}
+                    </span>
+                    <span className="text-xs text-gray-400">6. 7. 2026</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary-600 transition-colors">
+                    {translations.posts.expatCustomersTitle.cs}
+                  </h3>
+                  <p className="text-sm text-gray-600 line-clamp-3 mb-6 flex-1">
+                    {translations.posts.expatCustomersDesc.cs}
+                  </p>
+                  <div className="flex items-center text-primary-600 font-medium text-sm mt-auto">
+                    {translations.posts.readMore.cs}
+                    <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                </div>
+              </Link>
+
+              {/* Card — Seasonal demand */}
+              <Link href="/sezonni-poptavka-tepla-voda-topeni-2026" className="group flex flex-col bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all overflow-hidden">
+                <div className="aspect-[16/9] w-full bg-gray-100 overflow-hidden relative">
+                  <div className="absolute inset-0 bg-primary-500/10 group-hover:bg-transparent transition-colors z-10" />
+                  <Image src="/sezonni-poptavka-tepla-voda-topeni-2026.webp" alt="Technik provádí servis kotle" fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                </div>
+                <div className="p-6 flex-1 flex flex-col">
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="px-2.5 py-1 rounded-md bg-primary-50 text-primary-700 text-xs font-semibold">
+                      {translations.categories.providers.cs}
+                    </span>
+                    <span className="text-xs text-gray-400">6. 7. 2026</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary-600 transition-colors">
+                    {translations.posts.seasonalTitle.cs}
+                  </h3>
+                  <p className="text-sm text-gray-600 line-clamp-3 mb-6 flex-1">
+                    {translations.posts.seasonalDesc.cs}
+                  </p>
+                  <div className="flex items-center text-primary-600 font-medium text-sm mt-auto">
+                    {translations.posts.readMore.cs}
                     <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>

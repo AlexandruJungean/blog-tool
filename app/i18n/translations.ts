@@ -16,9 +16,13 @@ export const translations = {
   // ── Hero ──
   hero: {
     badge: { en: "Tool Connect Blog", cs: "Tool Connect Blog" },
-    titlePre: { en: "Your Guide to", cs: "Váš průvodce" },
-    titleHighlight: { en: "Expat Life", cs: "životem expata" },
-    titlePost: { en: "in Czech Republic", cs: "v České republice" },
+    blogTitle: {
+      en: "The Tool Connect Guide: Local Services, Expat Life & Real Stories",
+      cs: "Průvodce Tool Connect: Místní služby, život expatů a skutečné příběhy",
+    },
+    titlePre: { en: "The Tool Connect Guide:", cs: "Průvodce Tool Connect:" },
+    titleHighlight: { en: "Local Services, Expat Life", cs: "Místní služby, život expatů" },
+    titlePost: { en: "& Real Stories", cs: "a skutečné příběhy" },
     description: {
       en: "Practical tips, honest guides, and local insights to help you navigate life in Prague and beyond, from finding trusted service providers to settling into your new home.",
       cs: "Praktické tipy, upřímné průvodce a místní rady, které vám pomohou zorientovat se v životě v Praze i jinde, od hledání ověřených poskytovatelů služeb po zabydlení se v novém domově.",
@@ -37,8 +41,16 @@ export const translations = {
 
   // ── Categories & Posts ──
   categories: {
-    providers: { en: "For Providers", cs: "Pro poskytovatele" },
+    providers: { en: "For Providers", cs: "Pro poskytovatele služeb" },
     expats: { en: "For Expats in Prague", cs: "Pro expaty v Praze" },
+    expatsDesc: {
+      en: "Guides and practical tips for living in Czechia, written in English.",
+      cs: "Guides and practical tips for living in Czechia, written in English.",
+    },
+    providersDesc: {
+      en: "Návody a tipy pro řemeslníky a poskytovatele služeb, psané česky.",
+      cs: "Návody a tipy pro řemeslníky a poskytovatele služeb, psané česky.",
+    },
   },
   posts: {
     craftsmanTitle: { en: "How to Get More Jobs as a Craftsman in Czechia (2026)", cs: "Jak získat víc zakázek jako řemeslník v Česku (2026)" },
@@ -50,6 +62,14 @@ export const translations = {
     pricingDesc: { en: "Step-by-step pricing framework for tradespeople: calculate your minimum rate, raise prices confidently, and handle 'that's too expensive' without losing clients.", cs: "Kalkulační vzorec pro živnostníky: jak zjistit minimální sazbu, kdy zvýšit ceny a jak reagovat na 'je to moc drahé' bez ztráty zákazníků." },
     handymanTitle: { en: "How to Find a Reliable Handyman in Prague (Expat Guide 2026)", cs: "Jak najít spolehlivého řemeslníka v Praze (Průvodce pro cizince 2026)" },
     handymanDesc: { en: "Where to search, how to vet, red flags to avoid, and fair 2026 price ranges for home services in Prague. No Czech language required.", cs: "Kde hledat, jak ověřit, varovné signály a spravedlivé ceny za domácí opravy v Praze 2026. Bez znalosti češtiny." },
+    diyYoutubeTitle: { en: "How Many Times Have You Fixed It Yourself From a YouTube Video?", cs: "Kolikrát jste se o opravu pokusili sami podle YouTube videa?" },
+    diyYoutubeDesc: { en: "What's safe to DIY in a Prague apartment, what legally requires a licensed professional, and how to find English-speaking help fast.", cs: "Co lze opravit svépomocí v pražském bytě, co ze zákona vyžaduje odborníka a jak rychle najít anglicky mluvící pomoc." },
+    expatCustomersTitle: { en: "Understanding Expat Customers in the Czech Republic: Why Trust Matters More Than Language", cs: "Zákazníci z řad expatů v České republice: Proč důvěra znamená víc než jazyk" },
+    expatCustomersDesc: { en: "More than a million foreigners in Czechia need reliable providers. Why trust and fair dealing matter more to them than the lowest price.", cs: "Více než milion cizinců v Česku hledá spolehlivé řemeslníky. Proč pro ně důvěra a férové jednání znamenají víc než nejnižší cena." },
+    hotWaterTitle: { en: "Hot Water Outages in Prague: Why They Happen Every Summer and Who to Call", cs: "Odstávky teplé vody v Praze: Proč k nim každé léto dochází a komu volat" },
+    hotWaterDesc: { en: "No hot water in your Prague flat? Why summer district-heating shutdowns happen, how long they can last by law, and who to actually call.", cs: "Nemáte doma teplou vodu? Proč v létě dochází k odstávkám dálkového tepla, jak dlouho ze zákona trvají a komu skutečně zavolat." },
+    seasonalTitle: { en: "Seasonal Demand: Preparing for Summer Hot Water Calls and Winter Heating Jobs", cs: "Sezónní poptávka: Jak se připravit na letní odstávky teplé vody a zimní topenářské zakázky" },
+    seasonalDesc: { en: "Demand for plumbers and heating techs peaks twice a year, predictably. How to prepare for both waves and keep your calendar full.", cs: "Poptávka po instalatérech a topenářích má dvě předvídatelné špičky ročně. Jak se připravit na obě vlny a zaplnit diář." },
   },
 
   // ── CTA ──
