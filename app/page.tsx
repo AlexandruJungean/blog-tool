@@ -8,27 +8,33 @@ import Footer from "./components/Footer";
 import { useLanguage } from "./i18n/LanguageProvider";
 import { translations, t } from "./i18n/translations";
 
-// For Expats column — always English, regardless of the language toggle
-const expatFeed = [
-  { href: "/what-services-cost-prague-2026", img: "/what-services-cost-prague-2026.webp", alt: "Prague city", title: translations.posts.costTitle.en, date: "Jun 15, 2026" },
-  { href: "/find-reliable-handyman-prague-2026", img: "/find-reliable-handyman-prague-2026.webp", alt: "Handyman in Prague", title: translations.posts.handymanTitle.en, date: "Jun 19, 2026" },
-  { href: "/diy-youtube-fix-prague-2026", img: "/diy-youtube-fix-prague-2026.webp", alt: "Person fixing apartment in Prague", title: translations.posts.diyYoutubeTitle.en, date: "Jun 27, 2026" },
-  { href: "/hot-water-outages-prague-2026", img: "/hot-water-outages-prague-2026.webp", alt: "Bathroom shower during a Prague hot water outage", title: translations.posts.hotWaterTitle.en, date: "Jul 6, 2026" },
+type LocalizedText = { readonly en: string; readonly cs: string };
+type FeedSourcePost = {
+  href: string;
+  img: string;
+  alt: string;
+  title: LocalizedText;
+  date: LocalizedText;
+};
+
+const expatFeed: FeedSourcePost[] = [
+  { href: "/what-services-cost-prague-2026", img: "/what-services-cost-prague-2026.webp", alt: "Prague city", title: translations.posts.costTitle, date: { en: "Jun 15, 2026", cs: "15. 6. 2026" } },
+  { href: "/find-reliable-handyman-prague-2026", img: "/find-reliable-handyman-prague-2026.webp", alt: "Handyman in Prague", title: translations.posts.handymanTitle, date: { en: "Jun 19, 2026", cs: "19. 6. 2026" } },
+  { href: "/diy-youtube-fix-prague-2026", img: "/diy-youtube-fix-prague-2026.webp", alt: "Person fixing apartment in Prague", title: translations.posts.diyYoutubeTitle, date: { en: "Jun 27, 2026", cs: "27. 6. 2026" } },
+  { href: "/hot-water-outages-prague-2026", img: "/hot-water-outages-prague-2026.webp", alt: "Bathroom shower during a Prague hot water outage", title: translations.posts.hotWaterTitle, date: { en: "Jul 6, 2026", cs: "6. 7. 2026" } },
 ];
 
-// For Service Providers column — always Czech, regardless of the language toggle
-const providerFeed = [
-  { href: "/jak-ziskat-vic-zakazek-remeslnik-2026", img: "/jak-ziskat-vic-zakazek-remeslnik-2026.webp", alt: "Craftsman at work", title: translations.posts.craftsmanTitle.cs, date: "15. 6. 2026" },
-  { href: "/jak-stanovit-ceny-remeslnik-2026", img: "/jak-stanovit-ceny-remeslnik-2026.webp", alt: "Tradesperson pricing work", title: translations.posts.pricingTitle.cs, date: "19. 6. 2026" },
-  { href: "/zakaznici-z-rad-expatu-v-cesku", img: "/zakaznici-z-rad-expatu-v-cesku.webp", alt: "Tradesperson communicating with expat client", title: translations.posts.expatCustomersTitle.cs, date: "6. 7. 2026" },
-  { href: "/sezonni-poptavka-tepla-voda-topeni-2026", img: "/sezonni-poptavka-tepla-voda-topeni-2026.webp", alt: "Technik provádí servis kotle", title: translations.posts.seasonalTitle.cs, date: "6. 7. 2026" },
+const providerFeed: FeedSourcePost[] = [
+  { href: "/jak-ziskat-vic-zakazek-remeslnik-2026", img: "/jak-ziskat-vic-zakazek-remeslnik-2026.webp", alt: "Craftsman at work", title: translations.posts.craftsmanTitle, date: { en: "Jun 15, 2026", cs: "15. 6. 2026" } },
+  { href: "/jak-stanovit-ceny-remeslnik-2026", img: "/jak-stanovit-ceny-remeslnik-2026.webp", alt: "Tradesperson pricing work", title: translations.posts.pricingTitle, date: { en: "Jun 19, 2026", cs: "19. 6. 2026" } },
+  { href: "/zakaznici-z-rad-expatu-v-cesku", img: "/zakaznici-z-rad-expatu-v-cesku.webp", alt: "Tradesperson communicating with expat client", title: translations.posts.expatCustomersTitle, date: { en: "Jul 6, 2026", cs: "6. 7. 2026" } },
+  { href: "/sezonni-poptavka-tepla-voda-topeni-2026", img: "/sezonni-poptavka-tepla-voda-topeni-2026.webp", alt: "Technician servicing a boiler", title: translations.posts.seasonalTitle, date: { en: "Jul 6, 2026", cs: "6. 7. 2026" } },
 ];
 
-// Community Stories column — real submitted stories, kept in their original language.
 // Never feature a client's photo or story as a homepage hero; it belongs here as
 // one ordinary feed card among others, exactly like the two columns above.
-const communityFeed = [
-  { href: "/about-trust-stranger-prague-story", img: "/about-trust-stranger-prague-story.webp", alt: "A quiet street in Prague on a Saturday morning", title: translations.posts.aboutTrustTitle.en, date: "Jul 15, 2026" },
+const communityFeed: FeedSourcePost[] = [
+  { href: "/about-trust-stranger-prague-story", img: "/about-trust-stranger-prague-story.webp", alt: "A quiet street in Prague on a Saturday morning", title: translations.posts.aboutTrustTitle, date: { en: "Jul 15, 2026", cs: "15. 7. 2026" } },
 ];
 
 function FeedColumn({
@@ -75,6 +81,12 @@ function FeedColumn({
 
 export default function BlogPage() {
   const { lang } = useLanguage();
+  const localizeFeed = (posts: FeedSourcePost[]) =>
+    posts.map((post) => ({
+      ...post,
+      title: t(post.title, lang),
+      date: t(post.date, lang),
+    }));
 
   useEffect(() => {
     document.title = t(translations.hero.blogTitle, lang);
@@ -156,21 +168,21 @@ export default function BlogPage() {
         {/* ═══════════ THREE-COLUMN BLOG FEED ═══════════ */}
         <section className="mx-auto max-w-7xl px-6 lg:px-8 py-12 lg:py-16">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-0 lg:divide-x lg:divide-gray-100">
-            {/* Column: For Expats — always shown in English */}
+            {/* Column: For Expats */}
             <div className="lg:pr-8">
               <FeedColumn
-                title={translations.categories.expats.en}
-                description={translations.categories.expatsDesc.en}
-                posts={expatFeed}
+                title={t(translations.categories.expats, lang)}
+                description={t(translations.categories.expatsDesc, lang)}
+                posts={localizeFeed(expatFeed)}
               />
             </div>
 
-            {/* Column: For Service Providers — always shown in Czech */}
+            {/* Column: For Service Providers */}
             <div className="lg:px-8">
               <FeedColumn
-                title={translations.categories.providers.cs}
-                description={translations.categories.providersDesc.cs}
-                posts={providerFeed}
+                title={t(translations.categories.providers, lang)}
+                description={t(translations.categories.providersDesc, lang)}
+                posts={localizeFeed(providerFeed)}
               />
             </div>
 
@@ -183,7 +195,7 @@ export default function BlogPage() {
                 <FeedColumn
                   title={t(translations.categories.community, lang)}
                   description={t(translations.categories.communityDesc, lang)}
-                  posts={communityFeed}
+                  posts={localizeFeed(communityFeed)}
                 />
               ) : (
                 <>
