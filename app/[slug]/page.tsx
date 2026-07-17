@@ -18,7 +18,7 @@ type Frontmatter = {
   ogImage?: string;
   date?: string;
   author?: string;
-  section?: "client" | "provider";
+  section?: "client" | "provider" | "community";
   lang?: string;
 };
 
@@ -102,9 +102,13 @@ export default async function PostPage(
                   ? data.lang === "cs"
                     ? "Pro expaty v Praze"
                     : "For expats in Prague"
-                  : data.lang === "cs"
-                    ? "Pro poskytovatele"
-                    : "For providers"}
+                  : data.section === "community"
+                    ? data.lang === "cs"
+                      ? "Příběh komunity"
+                      : "Community Story"
+                    : data.lang === "cs"
+                      ? "Pro poskytovatele"
+                      : "For providers"}
               </span>
             )}
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">

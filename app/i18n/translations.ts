@@ -38,18 +38,30 @@ export const translations = {
       cs: "Pracujeme na praktických průvodcích a tipech pro expaty v České republice. Brzy se vraťte!",
     },
   },
+  communityEmpty: {
+    title: { en: "Stories coming soon", cs: "Příběhy již brzy" },
+    description: {
+      en: "We're collecting real stories from expats and providers using Tool Connect. The first ones will appear here soon.",
+      cs: "Sbíráme skutečné příběhy expatů a poskytovatelů, kteří používají Tool Connect. První příběhy se tu brzy objeví.",
+    },
+  },
 
   // ── Categories & Posts ──
   categories: {
     providers: { en: "For Providers", cs: "Pro poskytovatele služeb" },
     expats: { en: "For Expats in Prague", cs: "Pro expaty v Praze" },
+    community: { en: "Community Stories", cs: "Příběhy komunity" },
     expatsDesc: {
       en: "Guides and practical tips for living in Czechia, written in English.",
-      cs: "Guides and practical tips for living in Czechia, written in English.",
+      cs: "Návody a praktické tipy pro život v Česku, psané v angličtině.",
     },
     providersDesc: {
       en: "Návody a tipy pro řemeslníky a poskytovatele služeb, psané česky.",
       cs: "Návody a tipy pro řemeslníky a poskytovatele služeb, psané česky.",
+    },
+    communityDesc: {
+      en: "Real experiences from expats and providers using Tool Connect.",
+      cs: "Skutečné zkušenosti expatů a poskytovatelů, kteří používají Tool Connect.",
     },
   },
   posts: {
@@ -70,6 +82,8 @@ export const translations = {
     hotWaterDesc: { en: "No hot water in your Prague flat? Why summer district-heating shutdowns happen, how long they can last by law, and who to actually call.", cs: "Nemáte doma teplou vodu? Proč v létě dochází k odstávkám dálkového tepla, jak dlouho ze zákona trvají a komu skutečně zavolat." },
     seasonalTitle: { en: "Seasonal Demand: Preparing for Summer Hot Water Calls and Winter Heating Jobs", cs: "Sezónní poptávka: Jak se připravit na letní odstávky teplé vody a zimní topenářské zakázky" },
     seasonalDesc: { en: "Demand for plumbers and heating techs peaks twice a year, predictably. How to prepare for both waves and keep your calendar full.", cs: "Poptávka po instalatérech a topenářích má dvě předvídatelné špičky ročně. Jak se připravit na obě vlny a zaplnit diář." },
+    aboutTrustTitle: { en: "About Trust: A Stranger, a Dog, and a Prague Morning", cs: "About Trust: A Stranger, a Dog, and a Prague Morning" },
+    aboutTrustDesc: { en: "A true story from our community: a quiet Prague morning, a language barrier, and a stranger who trusted a dog walker enough to lean on her all the way home.", cs: "A true story from our community: a quiet Prague morning, a language barrier, and a stranger who trusted a dog walker enough to lean on her all the way home." },
   },
 
   // ── CTA ──
