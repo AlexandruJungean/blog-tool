@@ -1,4 +1,5 @@
 # blog-tool — The Tool Connect Blog
+# Netlify Push nr 2.
 
 This repository is for the **Tool Connect blog**, which will be published at **https://blog.tool-connect.com**.
 
