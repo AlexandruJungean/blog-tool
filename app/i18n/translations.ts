@@ -56,7 +56,7 @@ export const translations = {
       cs: "Návody a praktické tipy pro život v Česku, psané v angličtině.",
     },
     providersDesc: {
-      en: "Návody a tipy pro řemeslníky a poskytovatele služeb, psané česky.",
+      en: "Guides and practical tips for tradespeople and service providers.",
       cs: "Návody a tipy pro řemeslníky a poskytovatele služeb, psané česky.",
     },
     communityDesc: {
