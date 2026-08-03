@@ -84,6 +84,14 @@ export const translations = {
     seasonalDesc: { en: "Demand for plumbers and heating techs peaks twice a year, predictably. How to prepare for both waves and keep your calendar full.", cs: "Poptávka po instalatérech a topenářích má dvě předvídatelné špičky ročně. Jak se připravit na obě vlny a zaplnit diář." },
     aboutTrustTitle: { en: "About Trust: A Stranger, a Dog, and a Prague Morning", cs: "About Trust: A Stranger, a Dog, and a Prague Morning" },
     aboutTrustDesc: { en: "A true story from our community: a quiet Prague morning, a language barrier, and a stranger who trusted a dog walker enough to lean on her all the way home.", cs: "A true story from our community: a quiet Prague morning, a language barrier, and a stranger who trusted a dog walker enough to lean on her all the way home." },
+    apartmentMaintenanceTitle: { en: "Apartment Maintenance in Prague: When It's the Landlord's Job vs Yours", cs: "Apartment Maintenance in Prague: When It's the Landlord's Job vs Yours" },
+    trustSpeedTitle: { en: "Why Trust Beats Speed: Keeping Repeat Expat Clients", cs: "Důvěra vyhrává nad rychlostí: Jak si udržet stálé zákazníky z řad expatů" },
+    firstMonthTitle: { en: "First 30 Days in a New Prague Flat: Repair and Setup Checklist", cs: "First 30 Days in a New Prague Flat: Repair and Setup Checklist" },
+    licenseTitle: { en: "Licenses and Certifications: What Expats Look for Before They Trust You", cs: "Licence a certifikace: Co si expati ověří, než vám budou věřit" },
+    tutorTitle: { en: "How to Find a Tutor in the Czech Republic (2026 Guide for Expats)", cs: "How to Find a Tutor in the Czech Republic (2026 Guide for Expats)" },
+    growBusinessTitle: { en: "When to Grow Your Trade Business in Czechia: Helper, DPP, or Subcontractor", cs: "Kdy a jak rozšířit řemeslnou živnost: pomocník, DPP, nebo spolupráce s dalším OSVČ" },
+    depositTitle: { en: "Security Deposits in Prague: How to Get Your Full Deposit Back When You Move Out", cs: "Security Deposits in Prague: How to Get Your Full Deposit Back When You Move Out" },
+    flatTaxTitle: { en: "Flat Tax or Real Expenses? Choosing a Tax Regime as a Czech Self-Employed Tradesperson in 2026", cs: "Paušální daň, nebo skutečné výdaje? Jak zvolit daňový režim pro OSVČ v roce 2026" },
   },
 
   // ── CTA ──
@@ -93,8 +101,8 @@ export const translations = {
       cs: "Potřebujete poskytovatele služeb v Praze?",
     },
     description: {
-      en: "Tool Connect helps you find verified, English-speaking professionals — plumbers, electricians, tutors, and more. All vetted, all reviewed.",
-      cs: "Tool Connect vám pomůže najít ověřené profesionály — instalatéry, elektrikáře, lektory a další. Všichni prověření, všichni hodnocení.",
+      en: "Tool Connect helps you find verified, English-speaking professionals, plumbers, electricians, tutors, and more. All vetted, all reviewed.",
+      cs: "Tool Connect vám pomůže najít ověřené profesionály, instalatéry, elektrikáře, lektory a další. Všichni prověření, všichni hodnocení.",
     },
     button: { en: "Visit Tool Connect", cs: "Navštívit Tool Connect" },
   },

@@ -22,6 +22,10 @@ const expatFeed: FeedSourcePost[] = [
   { href: "/find-reliable-handyman-prague-2026", img: "/find-reliable-handyman-prague-2026.webp", alt: "Handyman in Prague", title: translations.posts.handymanTitle, date: { en: "Jun 19, 2026", cs: "19. 6. 2026" } },
   { href: "/diy-youtube-fix-prague-2026", img: "/diy-youtube-fix-prague-2026.webp", alt: "Person fixing apartment in Prague", title: translations.posts.diyYoutubeTitle, date: { en: "Jun 27, 2026", cs: "27. 6. 2026" } },
   { href: "/hot-water-outages-prague-2026", img: "/hot-water-outages-prague-2026.webp", alt: "Bathroom shower during a Prague hot water outage", title: translations.posts.hotWaterTitle, date: { en: "Jul 6, 2026", cs: "6. 7. 2026" } },
+  { href: "/apartment-maintenance-landlord-vs-yours-2026", img: "/apartment-maintenance-landlord-vs-yours-2026.webp", alt: "Apartment repair in a Prague flat", title: translations.posts.apartmentMaintenanceTitle, date: { en: "Jul 13, 2026", cs: "13. 7. 2026" } },
+  { href: "/first-30-days-prague-flat-checklist-2026", img: "/first-30-days-prague-flat-checklist-2026.webp", alt: "Moving boxes and keys in a new Prague apartment", title: translations.posts.firstMonthTitle, date: { en: "Jul 21, 2026", cs: "21. 7. 2026" } },
+  { href: "/how-to-find-a-tutor-czech-republic-2026", img: "/how-to-find-a-tutor-czech-republic-2026.webp", alt: "Tutor and student studying together", title: translations.posts.tutorTitle, date: { en: "Jul 27, 2026", cs: "27. 7. 2026" } },
+  { href: "/security-deposits-prague-move-out-2026", img: "/security-deposits-prague-move-out-2026.webp", alt: "Hands exchanging keys during a home handover", title: translations.posts.depositTitle, date: { en: "Aug 2, 2026", cs: "2. 8. 2026" } },
 ];
 
 const providerFeed: FeedSourcePost[] = [
@@ -29,6 +33,10 @@ const providerFeed: FeedSourcePost[] = [
   { href: "/jak-stanovit-ceny-remeslnik-2026", img: "/jak-stanovit-ceny-remeslnik-2026.webp", alt: "Tradesperson pricing work", title: translations.posts.pricingTitle, date: { en: "Jun 19, 2026", cs: "19. 6. 2026" } },
   { href: "/zakaznici-z-rad-expatu-v-cesku", img: "/zakaznici-z-rad-expatu-v-cesku.webp", alt: "Tradesperson communicating with expat client", title: translations.posts.expatCustomersTitle, date: { en: "Jul 6, 2026", cs: "6. 7. 2026" } },
   { href: "/sezonni-poptavka-tepla-voda-topeni-2026", img: "/sezonni-poptavka-tepla-voda-topeni-2026.webp", alt: "Technician servicing a boiler", title: translations.posts.seasonalTitle, date: { en: "Jul 6, 2026", cs: "6. 7. 2026" } },
+  { href: "/duvera-vic-nez-rychlost-stali-expat-zakaznici-2026", img: "/duvera-vic-nez-rychlost-stali-expat-zakaznici-2026.webp", alt: "Tradesperson shaking hands with a returning customer", title: translations.posts.trustSpeedTitle, date: { en: "Jul 13, 2026", cs: "13. 7. 2026" } },
+  { href: "/licence-certifikace-duvera-expatu-2026", img: "/licence-certifikace-duvera-expatu-2026.webp", alt: "Inspector reviewing certification documents", title: translations.posts.licenseTitle, date: { en: "Jul 21, 2026", cs: "21. 7. 2026" } },
+  { href: "/kdy-rozsirit-zivnost-pomocnik-2026", img: "/kdy-rozsirit-zivnost-pomocnik-2026.webp", alt: "Two tradespeople discussing a work plan on site", title: translations.posts.growBusinessTitle, date: { en: "Jul 27, 2026", cs: "27. 7. 2026" } },
+  { href: "/pausalni-dan-nebo-skutecne-vydaje-osvc-2026", img: "/pausalni-dan-nebo-skutecne-vydaje-osvc-2026.webp", alt: "Self-employed tradesperson calculating figures over tax documents", title: translations.posts.flatTaxTitle, date: { en: "Aug 2, 2026", cs: "2. 8. 2026" } },
 ];
 
 // Never feature a client's photo or story as a homepage hero; it belongs here as
