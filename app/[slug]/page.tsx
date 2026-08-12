@@ -22,6 +22,35 @@ type Frontmatter = {
   lang?: string;
 };
 
+const SITE_URL = "https://blog.tool-connect.com";
+
+function stripMarkdown(text: string): string {
+  return text
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+    .replace(/\*\*([^*]+)\*\*/g, "$1")
+    .replace(/`([^`]+)`/g, "$1")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function extractFaqs(content: string): { question: string; answer: string }[] {
+  const faqMatch = content.match(/##\s*FAQ\b([\s\S]*?)(?=\n##\s|\n---\s*\n##|$)/i);
+  if (!faqMatch) return [];
+
+  const section = faqMatch[1];
+  const pairs: { question: string; answer: string }[] = [];
+  const pairRegex = /\*\*(.+?)\*\*\s*\n+([\s\S]*?)(?=\n\*\*.+?\*\*|$)/g;
+  let match: RegExpExecArray | null;
+
+  while ((match = pairRegex.exec(section)) !== null) {
+    const question = stripMarkdown(match[1]);
+    const answer = stripMarkdown(match[2]);
+    if (question && answer) pairs.push({ question, answer });
+  }
+
+  return pairs;
+}
+
 function findPosts(slug: string): Record<string, { data: Frontmatter; content: string }> {
   const posts: Record<string, { data: Frontmatter; content: string }> = {};
   for (const lang of ["en", "cs"]) {
@@ -82,6 +111,35 @@ export default async function PostPage(
   const { slug } = await params;
   const posts = findPosts(slug);
   if (!posts.en && !posts.cs) notFound();
+
+  const primary = posts.en ?? posts.cs;
+  const articleSchema = primary && {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: primary.data.title,
+    description: primary.data.description,
+    image: primary.data.ogImage
+      ? primary.data.ogImage.startsWith("http")
+        ? primary.data.ogImage
+        : `${SITE_URL}${primary.data.ogImage}`
+      : undefined,
+    author: { "@type": "Organization", name: primary.data.author ?? "Tool Connect Team" },
+    publisher: { "@type": "Organization", name: "Tool Connect" },
+    datePublished: primary.data.date,
+    dateModified: primary.data.date,
+    mainEntityOfPage: { "@type": "WebPage", "@id": `${SITE_URL}/${slug}` },
+  };
+
+  const faqs = primary ? extractFaqs(primary.content) : [];
+  const faqSchema = faqs.length > 0 && {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: { "@type": "Answer", text: faq.answer },
+    })),
+  };
 
   const renderPost = (langData: { data: Frontmatter; content: string } | undefined) => {
     if (!langData) return null;
@@ -164,6 +222,19 @@ export default async function PostPage(
 
   return (
     <>
+      {articleSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+        />
+      )}
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
+
       <Header />
 
       <ClientLanguageWrapper

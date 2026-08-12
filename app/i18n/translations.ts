@@ -92,6 +92,10 @@ export const translations = {
     growBusinessTitle: { en: "When to Grow Your Trade Business in Czechia: Helper, DPP, or Subcontractor", cs: "Kdy a jak rozšířit řemeslnou živnost: pomocník, DPP, nebo spolupráce s dalším OSVČ" },
     depositTitle: { en: "Security Deposits in Prague: How to Get Your Full Deposit Back When You Move Out", cs: "Security Deposits in Prague: How to Get Your Full Deposit Back When You Move Out" },
     flatTaxTitle: { en: "Flat Tax or Real Expenses? Choosing a Tax Regime as a Czech Self-Employed Tradesperson in 2026", cs: "Paušální daň, nebo skutečné výdaje? Jak zvolit daňový režim pro OSVČ v roce 2026" },
+    emergencyTitle: { en: "Emergency Repairs in Prague: Who to Call at 11pm and What It Actually Costs", cs: "Emergency Repairs in Prague: Who to Call at 11pm and What It Actually Costs" },
+    surchargeTitle: { en: "Emergency Call-Outs: How to Set Evening and Weekend Surcharges as a Czech Tradesperson", cs: "Pohotovostní zakázky: jak nastavit večerní a víkendové příplatky" },
+    quoteReadTitle: { en: "How to Read a Czech Repair Quote (Rozpočet) Before You Agree to Pay", cs: "How to Read a Czech Repair Quote (Rozpočet) Before You Agree to Pay" },
+    quoteWriteTitle: { en: "How to Write a Price Quote Customers Approve on the First Try", cs: "Jak napsat cenovou nabídku, kterou zákazník odsouhlasí napoprvé" },
   },
 
   // ── CTA ──

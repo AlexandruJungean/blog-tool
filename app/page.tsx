@@ -26,6 +26,8 @@ const expatFeed: FeedSourcePost[] = [
   { href: "/first-30-days-prague-flat-checklist-2026", img: "/first-30-days-prague-flat-checklist-2026.webp", alt: "Moving boxes and keys in a new Prague apartment", title: translations.posts.firstMonthTitle, date: { en: "Jul 21, 2026", cs: "21. 7. 2026" } },
   { href: "/how-to-find-a-tutor-czech-republic-2026", img: "/how-to-find-a-tutor-czech-republic-2026.webp", alt: "Tutor and student studying together", title: translations.posts.tutorTitle, date: { en: "Jul 27, 2026", cs: "27. 7. 2026" } },
   { href: "/security-deposits-prague-move-out-2026", img: "/security-deposits-prague-move-out-2026.webp", alt: "Hands exchanging keys during a home handover", title: translations.posts.depositTitle, date: { en: "Aug 2, 2026", cs: "2. 8. 2026" } },
+  { href: "/emergency-repairs-prague-11pm-2026", img: "/emergency-repairs-prague-11pm-2026.webp", alt: "Electrician working safely on a circuit breaker panel", title: translations.posts.emergencyTitle, date: { en: "Aug 6, 2026", cs: "6. 8. 2026" } },
+  { href: "/how-to-read-czech-repair-quote-2026", img: "/how-to-read-czech-repair-quote-2026.webp", alt: "Hand holding a company invoice on a clipboard with a pen", title: translations.posts.quoteReadTitle, date: { en: "Aug 13, 2026", cs: "13. 8. 2026" } },
 ];
 
 const providerFeed: FeedSourcePost[] = [
@@ -37,6 +39,8 @@ const providerFeed: FeedSourcePost[] = [
   { href: "/licence-certifikace-duvera-expatu-2026", img: "/licence-certifikace-duvera-expatu-2026.webp", alt: "Inspector reviewing certification documents", title: translations.posts.licenseTitle, date: { en: "Jul 21, 2026", cs: "21. 7. 2026" } },
   { href: "/kdy-rozsirit-zivnost-pomocnik-2026", img: "/kdy-rozsirit-zivnost-pomocnik-2026.webp", alt: "Two tradespeople discussing a work plan on site", title: translations.posts.growBusinessTitle, date: { en: "Jul 27, 2026", cs: "27. 7. 2026" } },
   { href: "/pausalni-dan-nebo-skutecne-vydaje-osvc-2026", img: "/pausalni-dan-nebo-skutecne-vydaje-osvc-2026.webp", alt: "Self-employed tradesperson calculating figures over tax documents", title: translations.posts.flatTaxTitle, date: { en: "Aug 2, 2026", cs: "2. 8. 2026" } },
+  { href: "/pohotovostni-zakazky-prirazky-2026", img: "/pohotovostni-zakazky-prirazky-2026.webp", alt: "Tradesperson with tools by a van in the evening", title: translations.posts.surchargeTitle, date: { en: "Aug 6, 2026", cs: "6. 8. 2026" } },
+  { href: "/jak-napsat-cenovou-nabidku-2026", img: "/jak-napsat-cenovou-nabidku-2026.webp", alt: "Person using a stylus on a tablet to write a quote", title: translations.posts.quoteWriteTitle, date: { en: "Aug 13, 2026", cs: "13. 8. 2026" } },
 ];
 
 // Never feature a client's photo or story as a homepage hero; it belongs here as

@@ -20,25 +20,30 @@ const LanguageContext = createContext<LanguageContextValue>({
   setLang: () => {},
 });
 
-const LANGUAGE_STORAGE_KEY = "tool-connect-blog-language";
+const LANGUAGE_COOKIE_KEY = "tool-connect-blog-language";
 const languageListeners = new Set<() => void>();
 
+function readCookie(name: string): string | null {
+  const match = document.cookie
+    .split("; ")
+    .find((row) => row.startsWith(`${name}=`));
+  return match ? decodeURIComponent(match.split("=").slice(1).join("=")) : null;
+}
+
+function writeCookie(name: string, value: string) {
+  const oneYear = 60 * 60 * 24 * 365;
+  document.cookie = `${name}=${encodeURIComponent(value)}; path=/; max-age=${oneYear}; SameSite=Lax`;
+}
+
 function getStoredLanguage(): Lang {
-  const savedLanguage = window.localStorage.getItem(LANGUAGE_STORAGE_KEY);
+  const savedLanguage = readCookie(LANGUAGE_COOKIE_KEY);
   return savedLanguage === "en" || savedLanguage === "cs" ? savedLanguage : "cs";
 }
 
 function subscribeToLanguage(onStoreChange: () => void) {
-  const onStorage = (event: StorageEvent) => {
-    if (event.key === LANGUAGE_STORAGE_KEY) onStoreChange();
-  };
-
   languageListeners.add(onStoreChange);
-  window.addEventListener("storage", onStorage);
-
   return () => {
     languageListeners.delete(onStoreChange);
-    window.removeEventListener("storage", onStorage);
   };
 }
 
@@ -54,7 +59,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   }, [lang]);
 
   const setLang = useCallback((newLang: Lang) => {
-    window.localStorage.setItem(LANGUAGE_STORAGE_KEY, newLang);
+    writeCookie(LANGUAGE_COOKIE_KEY, newLang);
     languageListeners.forEach((listener) => listener());
   }, []);
 
