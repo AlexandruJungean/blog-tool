@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test:seo": "node scripts/verify-seo.mjs",
+    "seo:urls": "node scripts/verify-seo.mjs --list-urls"
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.20",

@@ -1,12 +1,11 @@
 "use client";
 
-import { useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import { useLanguage } from "./i18n/LanguageProvider";
 import { translations, t } from "./i18n/translations";
+import { localePath, type Lang } from "./lib/i18n";
 import type { FeedPost } from "./lib/posts";
 
 function formatDate(iso: string, lang: "en" | "cs"): string {
@@ -38,20 +37,20 @@ function FeedColumn({
         {posts.map((post) => (
           <Link
             key={post.slug}
-            href={`/${post.slug}`}
+            href={localePath(lang, post.slug)}
             className="group flex gap-3 py-3.5 border-b border-gray-100 last:border-0"
           >
             <div className="relative w-20 h-16 rounded-lg overflow-hidden shrink-0 bg-gray-100">
               <Image
                 src={post.img}
-                alt={post.title[lang]}
+                alt={post.title}
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-500"
               />
             </div>
             <div className="flex-1 min-w-0">
               <h3 className="text-sm font-semibold text-gray-900 group-hover:text-primary-600 transition-colors leading-snug line-clamp-2">
-                {post.title[lang]}
+                {post.title}
               </h3>
               <span className="text-xs text-gray-400 mt-1 block">{formatDate(post.date, lang)}</span>
             </div>
@@ -63,20 +62,16 @@ function FeedColumn({
 }
 
 export default function HomeClient({
+  lang,
   clientPosts,
   providerPosts,
   communityPosts,
 }: {
+  lang: Lang;
   clientPosts: FeedPost[];
   providerPosts: FeedPost[];
   communityPosts: FeedPost[];
 }) {
-  const { lang } = useLanguage();
-
-  useEffect(() => {
-    document.title = t(translations.hero.blogTitle, lang);
-  }, [lang]);
-
   return (
     <>
       <Header />

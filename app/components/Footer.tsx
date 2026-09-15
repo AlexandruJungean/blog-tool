@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useLanguage } from "../i18n/LanguageProvider";
 import { translations, t } from "../i18n/translations";
+import { localePath } from "../lib/i18n";
 
 const MAIN_SITE = "https://tool-connect.com";
 
@@ -85,7 +86,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/"
+                  href={localePath(lang)}
                   className="text-gray-400 hover:text-white transition-colors"
                   id="footer-blog"
                 >

@@ -14,16 +14,18 @@ Tool Connect is a Czech professional services marketplace that connects clients 
 ```
 blog-tool/
 ├── README.md              ← you are here
+├── proxy.ts               ← temporary language preference redirect for /
+├── next.config.ts         ← permanent redirects from old article URLs
 ├── app/                   ← Next.js App Router
-│   ├── page.tsx           ← blog home (article list)
-│   ├── [slug]/            ← individual article page
+│   ├── [lang]/            ← /cs and /en homepages + /[lang]/[slug] articles
+│   │   └── layout.tsx     ← root HTML layout, language, metadata, fonts
 │   ├── components/        ← Header, Footer
 │   ├── i18n/              ← language provider + translations (en / cs)
-│   ├── layout.tsx         ← root layout, metadata, fonts
 │   └── globals.css        ← global styles (Tailwind)
+├── scripts/verify-seo.mjs  ← HTTP audit of all localized pages and redirects
 ├── content/posts/         ← article content in MDX
-│   ├── en/                ← English articles
-│   └── cs/                ← Czech articles
+│   ├── en/                ← English articles → /en/<slug>
+│   └── cs/                ← Czech articles → /cs/<slug>
 ├── public/                ← images, og-image, favicons & app icons
 ├── briefs/                ← article briefs (planning/SEO)
 ├── editorial-calendar-Q3-2026.md
@@ -64,7 +66,11 @@ The blog is already set up and stays in the same direction as the main website:
 | [@tailwindcss/typography](https://github.com/tailwindlabs/tailwindcss-typography) | Nice default styling for article body | — |
 | Netlify | Hosting / deployment | — |
 
-Articles live in `content/posts/en` and `content/posts/cs` as `.mdx` files. Each file has front-matter (title, description, etc.) at the top, then the article body in Markdown. The site is bilingual (en / cs) via the provider in `app/i18n/`.
+Articles live in `content/posts/en` and `content/posts/cs` as `.mdx` files. Each file has front-matter (title, description, etc.) at the top, then the article body in Markdown.
+
+Each language is a separate URL: Czech at `/cs/<slug>`, English at `/en/<slug>`. The homepages are `/cs` and `/en`. Every old article URL (`/<slug>`) has a stable 308 redirect to its Czech version, or its English version if no Czech translation exists. These redirects are generated from all content files at build time and do not depend on cookies. Unknown URLs return 404.
+
+Only `/` uses the saved language preference (Czech by default), with a temporary, non-cacheable 307 redirect. A locale-prefixed URL always serves that language, regardless of cookies. Each page has one H1, language-matching title/description, a self-referencing canonical tag, and reciprocal `hreflang` links using `cs`, `en`, and a Czech `x-default` when both translations exist.
 
 ## First steps (local setup)
 
@@ -83,19 +89,46 @@ npm install
 npm run dev
 ```
 
-and open `http://localhost:3000`.
+and open `http://localhost:3000` (you will be redirected to `/cs` or `/en`).
 
 ### Adding a new article
 
-1. Create a `.mdx` file in `content/posts/en/` (and/or `content/posts/cs/`) — the file name becomes the URL slug (e.g. `find-reliable-handyman-prague-2026.mdx` → `/find-reliable-handyman-prague-2026`).
-2. Fill in the front-matter at the top (title, description, date, image).
+1. Create a `.mdx` file in `content/posts/en/` and/or `content/posts/cs/` — the file name becomes the slug (e.g. `find-reliable-handyman-prague-2026.mdx` → `/en/find-reliable-handyman-prague-2026` and `/cs/find-reliable-handyman-prague-2026`).
+2. Fill in the front-matter at the top (title, description, date, image) in that file's language.
 3. Add an Open Graph image to `public/` and reference it from the front-matter.
+4. Internal links to other articles can stay unprefixed (`/other-article-slug`); they are localized automatically to the current language.
+5. Start the article body with a paragraph or an H2 (`##`). The page already renders the front-matter title as its single H1.
+
+## Checking the language migration
+
+Run the production build and start it on port 3100:
+
+```sh
+npm run lint
+npm run build
+node node_modules/next/dist/bin/next start --port 3100
+```
+
+In another terminal, run `npm run test:seo`. The audit reads all existing MDX files, then checks the actual server-rendered HTML, localized titles/descriptions, one H1, canonical URLs, reciprocal hreflang links, structured data, internal links, homepage coverage, the sitemap, robots.txt, cookie behavior, legacy redirects, and 404 responses. It does not require JavaScript in a browser. Set `SEO_ORIGIN` to check another running server; canonical URLs must still use the production domain.
+
+The repository currently contains **25 articles in both languages (50 article URLs)**, even though the original request mentioned 23. The audit discovers files automatically, so all existing articles and future additions are included. The sitemap contains those 50 URLs plus the two language homepages.
+
+## After deployment: indexing
+
+Indexing submission is a separate post-deployment step; building the app does not submit URLs to Google.
+
+1. Run the same audit against production. In PowerShell: `$env:SEO_ORIGIN = 'https://blog.tool-connect.com'`, then `npm run test:seo`. Clear the override afterward with `Remove-Item Env:SEO_ORIGIN`.
+2. In the Search Console property covering `https://blog.tool-connect.com`, submit/resubmit `https://blog.tool-connect.com/sitemap.xml`.
+3. Export the complete list of localized article URLs with `node scripts/verify-seo.mjs --list-urls > indexing-urls.txt`. Use URL Inspection → Test live URL → Request indexing for each URL in both languages, subject to Google's daily quota. Access as a property owner or full user is required. Record completed requests and resume remaining ones when the quota allows.
+4. Monitor indexing and the selected canonical URLs in Search Console. Keep the old article redirects for at least one year, preferably indefinitely.
+
+Google recommends sitemap submission for many URLs and URL Inspection for individual requests; submitting does not guarantee indexing or a particular timeline. See [Google's recrawl guidance](https://developers.google.com/search/docs/crawling-indexing/ask-google-to-recrawl) and [URL migration guidance](https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes).
 
 ## Things to keep in mind
 
 - **Final domain**: `blog.tool-connect.com` — all internal links to the main site should point to `https://tool-connect.com`.
-- **SEO matters** — the blog exists primarily for organic traffic: every article needs a `title`, a `description`, a clean URL (e.g. `/how-to-find-a-plumber-in-prague`) and an Open Graph image (you can start from `public/og-image.webp`).
-- **Languages**: the main site is in English and Czech (`en` / `cs`). Structure the blog so it can support both languages.
+- **SEO matters** — the blog exists primarily for organic traffic: every article needs a `title`, a `description`, a language-prefixed URL (e.g. `/en/how-to-find-a-plumber-in-prague` and `/cs/how-to-find-a-plumber-in-prague`) and an Open Graph image (you can start from `public/og-image.webp`).
+- **Languages**: Czech and English are separate indexed pages (`/cs/...` and `/en/...`), linked with `hreflang` and canonical tags. Do not put both languages on one URL.
 - **Don't invent new colors** — only use the palette from `brand/colors.ts`. Details in the brand guide.
 
 ## Questions?

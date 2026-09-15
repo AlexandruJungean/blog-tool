@@ -3,8 +3,10 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useLanguage } from "../i18n/LanguageProvider";
+import { usePathname } from "next/navigation";
+import { persistLanguageCookie, useLanguage } from "../i18n/LanguageProvider";
 import { translations, t } from "../i18n/translations";
+import { localePath, replaceLocalePath } from "../lib/i18n";
 
 const MAIN_SITE = "https://tool-connect.com";
 
@@ -14,7 +16,8 @@ const languages = [
 ];
 
 export default function Header() {
-  const { lang, setLang } = useLanguage();
+  const { lang } = useLanguage();
+  const pathname = usePathname();
   const [langOpen, setLangOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -41,7 +44,7 @@ export default function Header() {
     { label: t(nav.about, lang), href: `${MAIN_SITE}/#about` },
     { label: t(nav.faq, lang), href: `${MAIN_SITE}/#faq` },
     { label: t(nav.contact, lang), href: `${MAIN_SITE}/#contact` },
-    { label: t(nav.blog, lang), href: "/", isActive: true },
+    { label: t(nav.blog, lang), href: localePath(lang), isActive: true },
   ];
 
   return (
@@ -136,13 +139,15 @@ export default function Header() {
                   onClick={(e) => e.stopPropagation()}
                 >
                   {languages.map((l) => (
-                    <button
+                    <Link
                       key={l.code}
+                      href={replaceLocalePath(pathname, l.code)}
+                      hrefLang={l.code}
                       onClick={() => {
-                        setLang(l.code);
+                        persistLanguageCookie(l.code);
                         setLangOpen(false);
                       }}
-                      className={`w-full px-4 py-2.5 text-left text-sm font-medium transition-colors ${
+                      className={`block w-full px-4 py-2.5 text-left text-sm font-medium transition-colors ${
                         lang === l.code
                           ? "bg-primary-50 text-primary-700"
                           : "text-gray-700 hover:bg-primary-50/50"
@@ -150,7 +155,7 @@ export default function Header() {
                       id={`lang-option-${l.code}`}
                     >
                       {l.label}
-                    </button>
+                    </Link>
                   ))}
                 </div>
               )}
@@ -225,10 +230,12 @@ export default function Header() {
           })}
           <div className="flex gap-2 pt-3 mt-2 border-t border-white/10">
             {languages.map((l) => (
-              <button
+              <Link
                 key={l.code}
+                href={replaceLocalePath(pathname, l.code)}
+                hrefLang={l.code}
                 onClick={() => {
-                  setLang(l.code);
+                  persistLanguageCookie(l.code);
                   setMobileOpen(false);
                 }}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
@@ -238,7 +245,7 @@ export default function Header() {
                 }`}
               >
                 {l.label}
-              </button>
+              </Link>
             ))}
           </div>
         </div>

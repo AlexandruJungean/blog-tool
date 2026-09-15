@@ -1,28 +1,19 @@
 import { notFound } from "next/navigation";
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import type { Metadata } from "next";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import ClientLanguageWrapper from "./ClientLanguageWrapper";
-
-const POSTS_DIR = path.join(process.cwd(), "content", "posts");
-
-type Frontmatter = {
-  title: string;
-  description: string;
-  keywords?: string[];
-  ogImage?: string;
-  date?: string;
-  author?: string;
-  section?: "client" | "provider" | "community";
-  lang?: string;
-};
-
-const SITE_URL = "https://blog.tool-connect.com";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import { createMdxComponents } from "../../components/mdx";
+import {
+  SITE_URL,
+  absoluteUrl,
+  hreflangLanguages,
+  isLang,
+  ogLocale,
+  type Lang,
+} from "../../lib/i18n";
+import { getAvailableLangs, getPost, getSlugs } from "../../lib/posts";
 
 function stripMarkdown(text: string): string {
   return text
@@ -51,49 +42,41 @@ function extractFaqs(content: string): { question: string; answer: string }[] {
   return pairs;
 }
 
-function findPosts(slug: string): Record<string, { data: Frontmatter; content: string }> {
-  const posts: Record<string, { data: Frontmatter; content: string }> = {};
-  for (const lang of ["en", "cs"]) {
-    const filePath = path.join(POSTS_DIR, lang, `${slug}.mdx`);
-    if (fs.existsSync(filePath)) {
-      const raw = fs.readFileSync(filePath, "utf-8");
-      const { data, content } = matter(raw);
-      posts[lang] = { data: data as Frontmatter, content };
-    }
-  }
-  return posts;
+export function generateStaticParams({ params }: { params: { lang: string } }) {
+  if (!isLang(params.lang)) return [];
+  return getSlugs(params.lang).map((slug) => ({ slug }));
 }
 
-export async function generateStaticParams() {
-  const slugs = new Set<string>();
-  for (const lang of ["en", "cs"]) {
-    const dir = path.join(POSTS_DIR, lang);
-    if (!fs.existsSync(dir)) continue;
-    for (const file of fs.readdirSync(dir)) {
-      if (file.endsWith(".mdx")) {
-        slugs.add(file.replace(/\.mdx$/, ""));
-      }
-    }
-  }
-  return Array.from(slugs).map(slug => ({ slug }));
-}
+export const dynamicParams = false;
 
-export async function generateMetadata(
-  { params }: { params: Promise<{ slug: string }> }
-): Promise<Metadata> {
-  const { slug } = await params;
-  const posts = findPosts(slug);
-  const post = posts.en || posts.cs;
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string; slug: string }>;
+}): Promise<Metadata> {
+  const { lang: raw, slug } = await params;
+  if (!isLang(raw)) return {};
+  const post = getPost(raw, slug);
   if (!post) return {};
+
   const { data } = post;
+  const canonical = absoluteUrl(raw, slug);
+  const available = getAvailableLangs(slug);
+
   return {
     title: data.title,
     description: data.description,
     keywords: data.keywords,
+    alternates: {
+      canonical,
+      languages: hreflangLanguages(available, slug),
+    },
     openGraph: {
       title: data.title,
       description: data.description,
       type: "article",
+      url: canonical,
+      locale: ogLocale(raw),
       images: [{ url: data.ogImage ?? "/og-image.webp", width: 1200, height: 630 }],
     },
     twitter: {
@@ -105,35 +88,45 @@ export async function generateMetadata(
   };
 }
 
-export default async function PostPage(
-  { params }: { params: Promise<{ slug: string }> }
-) {
-  const { slug } = await params;
-  const posts = findPosts(slug);
-  if (!posts.en && !posts.cs) notFound();
+export default async function PostPage({
+  params,
+}: {
+  params: Promise<{ lang: string; slug: string }>;
+}) {
+  const { lang: raw, slug } = await params;
+  if (!isLang(raw)) notFound();
 
-  const primary = posts.en ?? posts.cs;
-  const articleSchema = primary && {
+  const post = getPost(raw, slug);
+  if (!post) notFound();
+
+  const { data, content } = post;
+  const canonical = absoluteUrl(raw, slug);
+  const imageUrl = data.ogImage
+    ? data.ogImage.startsWith("http")
+      ? data.ogImage
+      : `${SITE_URL}${data.ogImage}`
+    : undefined;
+
+  const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: primary.data.title,
-    description: primary.data.description,
-    image: primary.data.ogImage
-      ? primary.data.ogImage.startsWith("http")
-        ? primary.data.ogImage
-        : `${SITE_URL}${primary.data.ogImage}`
-      : undefined,
-    author: { "@type": "Organization", name: primary.data.author ?? "Tool Connect Team" },
+    inLanguage: raw === "cs" ? "cs-CZ" : "en-GB",
+    headline: data.title,
+    description: data.description,
+    image: imageUrl,
+    author: { "@type": "Organization", name: data.author ?? "Tool Connect Team" },
     publisher: { "@type": "Organization", name: "Tool Connect" },
-    datePublished: primary.data.date,
-    dateModified: primary.data.date,
-    mainEntityOfPage: { "@type": "WebPage", "@id": `${SITE_URL}/${slug}` },
+    datePublished: data.date,
+    dateModified: data.date,
+    url: canonical,
+    mainEntityOfPage: { "@type": "WebPage", "@id": canonical },
   };
 
-  const faqs = primary ? extractFaqs(primary.content) : [];
+  const faqs = extractFaqs(content);
   const faqSchema = faqs.length > 0 && {
     "@context": "https://schema.org",
     "@type": "FAQPage",
+    inLanguage: raw === "cs" ? "cs-CZ" : "en-GB",
     mainEntity: faqs.map((faq) => ({
       "@type": "Question",
       name: faq.question,
@@ -141,12 +134,22 @@ export default async function PostPage(
     })),
   };
 
-  const renderPost = (langData: { data: Frontmatter; content: string } | undefined) => {
-    if (!langData) return null;
-    const { data, content } = langData;
-    return (
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
+
+      <Header />
+
       <main className="flex-1 pb-20">
-        {/* Article header */}
         <div
           className="pt-36 pb-14 px-6"
           style={{
@@ -156,17 +159,7 @@ export default async function PostPage(
           <div className="mx-auto max-w-3xl">
             {data.section && (
               <span className="inline-block mb-4 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-white/15 text-white/80">
-                {data.section === "client"
-                  ? data.lang === "cs"
-                    ? "Pro expaty v Praze"
-                    : "For expats in Prague"
-                  : data.section === "community"
-                    ? data.lang === "cs"
-                      ? "Příběh komunity"
-                      : "Community Story"
-                    : data.lang === "cs"
-                      ? "Pro poskytovatele"
-                      : "For providers"}
+                {sectionLabel(data.section, raw)}
               </span>
             )}
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">
@@ -179,7 +172,7 @@ export default async function PostPage(
                 {data.date && (
                   <time dateTime={data.date}>
                     {new Date(data.date).toLocaleDateString(
-                      data.lang === "cs" ? "cs-CZ" : "en-GB",
+                      raw === "cs" ? "cs-CZ" : "en-GB",
                       { year: "numeric", month: "long", day: "numeric" }
                     )}
                   </time>
@@ -189,7 +182,6 @@ export default async function PostPage(
           </div>
         </div>
 
-        {/* Article body */}
         <article className="mx-auto max-w-3xl px-6 lg:px-8 mt-12 mb-8">
           <div className="prose prose-lg max-w-none
             prose-headings:font-bold prose-headings:text-[#0F0A32] prose-headings:tracking-tight
@@ -211,38 +203,25 @@ export default async function PostPage(
             prose-figcaption:text-center prose-figcaption:text-xs prose-figcaption:text-gray-400 prose-figcaption:mt-2
           ">
             <MDXRemote
-                source={content}
-                options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
-              />
+              source={content}
+              components={createMdxComponents(raw)}
+              options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
+            />
           </div>
         </article>
       </main>
-    );
-  };
-
-  return (
-    <>
-      {articleSchema && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
-        />
-      )}
-      {faqSchema && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-        />
-      )}
-
-      <Header />
-
-      <ClientLanguageWrapper
-        enContent={renderPost(posts.en)}
-        csContent={renderPost(posts.cs)}
-      />
 
       <Footer />
     </>
   );
+}
+
+function sectionLabel(section: "client" | "provider" | "community", lang: Lang) {
+  if (section === "client") {
+    return lang === "cs" ? "Pro expaty v Praze" : "For expats in Prague";
+  }
+  if (section === "community") {
+    return lang === "cs" ? "Příběh komunity" : "Community Story";
+  }
+  return lang === "cs" ? "Pro poskytovatele" : "For providers";
 }

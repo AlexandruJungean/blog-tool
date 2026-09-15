@@ -1,53 +1,28 @@
 import type { MetadataRoute } from "next";
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
-
-const SITE_URL = "https://blog.tool-connect.com";
-const POSTS_DIR = path.join(process.cwd(), "content", "posts");
-
-function getSlugData(): { slug: string; lastModified: string }[] {
-  const bySlug = new Map<string, string>();
-
-  for (const lang of ["en", "cs"]) {
-    const dir = path.join(POSTS_DIR, lang);
-    if (!fs.existsSync(dir)) continue;
-
-    for (const file of fs.readdirSync(dir)) {
-      if (!file.endsWith(".mdx")) continue;
-      const slug = file.replace(/\.mdx$/, "");
-      const raw = fs.readFileSync(path.join(dir, file), "utf-8");
-      const { data } = matter(raw);
-      const date: string | undefined = data.date;
-
-      const existing = bySlug.get(slug);
-      if (!existing || (date && date > existing)) {
-        bySlug.set(slug, date ?? existing ?? "");
-      }
-    }
-  }
-
-  return Array.from(bySlug.entries()).map(([slug, lastModified]) => ({
-    slug,
-    lastModified,
-  }));
-}
+import { absoluteUrl, hreflangLanguages, locales } from "./lib/i18n";
+import { getAllLocalizedPosts, getAvailableLangs } from "./lib/posts";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const posts = getSlugData();
+  const posts = getAllLocalizedPosts();
 
   return [
-    {
-      url: SITE_URL,
+    ...locales.map((lang) => ({
+      url: absoluteUrl(lang),
       lastModified: new Date(),
-      changeFrequency: "daily",
+      changeFrequency: "daily" as const,
       priority: 1,
-    },
-    ...posts.map(({ slug, lastModified }) => ({
-      url: `${SITE_URL}/${slug}`,
-      lastModified: lastModified ? new Date(lastModified) : new Date(),
+      alternates: {
+        languages: hreflangLanguages(locales),
+      },
+    })),
+    ...posts.map(({ lang, slug, date }) => ({
+      url: absoluteUrl(lang, slug),
+      lastModified: date ? new Date(date) : new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.8,
+      alternates: {
+        languages: hreflangLanguages(getAvailableLangs(slug), slug),
+      },
     })),
   ];
 }
